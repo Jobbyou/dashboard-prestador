@@ -8,7 +8,7 @@ import {
   ChevronRight,
   Sparkles
 } from "lucide-react"
-import { NavLink, useLocation } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 
 import {
   Sidebar,
@@ -187,12 +187,15 @@ export function AppSidebar() {
             {collapsed ? (
               <LogOut className="w-5 h-5" />
             ) : (
+              <Link to="/login">
               <div className="flex items-center space-x-3">
+               
                 <div className="p-2 rounded-lg bg-white/10 group-hover:bg-red-500/20 transition-all duration-200">
                   <LogOut className="w-4 h-4" />
                 </div>
                 <span className="font-medium text-sm">Sair da Conta</span>
               </div>
+                </Link>
             )}
           </SidebarMenuButton>
         </div>

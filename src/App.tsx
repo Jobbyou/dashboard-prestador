@@ -45,8 +45,8 @@ const App = () => (
                         <Route path="/analytics" element={<Analytics />} />
                         <Route path="/assinatura" element={<div className="p-8"><h1 className="text-2xl font-bold">Assinatura - Em Desenvolvimento</h1></div>} />
                         <Route path="/configuracoes" element={<div className="p-8"><h1 className="text-2xl font-bold">Configurações - Em Desenvolvimento</h1></div>} />
-                        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                         <Route path="*" element={<NotFound />} />
+                        
                       </Routes>
                     </div>
                   </main>
