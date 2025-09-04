@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Jobbyou Design System - All colors, gradients, fonts, etc defined here. 
+All colors MUST be HSL for consistency.
+*/
+
+@layer base {
+  :root {
+    /* Jobbyou Brand Colors */
+    --midnight-blue: 231 78% 26%;
+    --amber: 45 100% 47%;
+    --safety-orange: 15 90% 51%;
+    --van-dyke: 28 19% 19%;
+    
+    /* Design System Tokens */
+    --background: 0 0% 100%;
+    --foreground: 28 19% 19%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 28 19% 19%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 28 19% 19%;
+
+    --primary: 231 78% 26%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 231 78% 95%;
+    --secondary-foreground: 231 78% 26%;
+
+    --muted: 231 10% 96%;
+    --muted-foreground: 231 10% 46%;
+
+    --accent: 45 100% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 231 20% 92%;
+    --input: 231 20% 92%;
+    --ring: 231 78% 26%;
+
+    --success: 120 60% 50%;
+    --warning: 45 100% 47%;
+    --info: 231 78% 26%;
+
+    /* Professional gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--safety-orange)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+
+    /* Professional shadows */
+    --shadow-card: 0 4px 12px hsl(var(--primary) / 0.1);
+    --shadow-elevated: 0 8px 32px hsl(var(--primary) / 0.15);
+    --shadow-accent: 0 4px 20px hsl(var(--accent) / 0.2);
+
+    /* Animation variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease;
+
+    --radius: 0.75rem;
+
+    /* Sidebar with Jobbyou brand colors */
+    --sidebar-background: 231 78% 26%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 45 100% 47%;
+    --sidebar-primary-foreground: 28 19% 19%;
+    --sidebar-accent: 231 78% 30%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 231 78% 20%;
+    --sidebar-ring: 45 100% 47%;
+  }
+
+  .dark {
+    /* Jobbyou brand colors remain consistent in dark mode */
+    --background: 28 19% 19%;
+    --foreground: 0 0% 100%;
+
+    --card: 28 19% 19%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 28 19% 19%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 231 78% 26%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 231 78% 15%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 231 20% 15%;
+    --muted-foreground: 231 10% 65%;
+
+    --accent: 45 100% 47%;
+    --accent-foreground: 28 19% 19%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 231 20% 25%;
+    --input: 231 20% 25%;
+    --ring: 231 78% 26%;
+
+    /* Sidebar colors for dark mode */
+    --sidebar-background: 231 78% 20%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 45 100% 47%;
+    --sidebar-primary-foreground: 28 19% 19%;
+    --sidebar-accent: 231 78% 25%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 231 78% 15%;
+    --sidebar-ring: 45 100% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Professional button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 shadow-card transition-smooth;
+  }
+  
+  .btn-accent {
+    @apply bg-accent text-accent-foreground hover:bg-accent/90 shadow-accent transition-smooth;
+  }
+  
+  .btn-safety {
+    background: hsl(var(--safety-orange));
+    color: hsl(var(--background));
+  }
+  
+  .btn-safety:hover {
+    background: hsl(var(--safety-orange) / 0.9);
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground)) hsl(var(--muted));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground));
+    border-radius: 3px;
+  }
+}
