@@ -31,7 +31,7 @@ const App = () => (
               <div className="min-h-screen flex w-full">
                 <AppSidebar />
                 <div className="flex-1 flex flex-col">
-                  <header className="h-16 border-b border-border bg-background flex items-center px-6">
+                  <header className="h-16 border-b border-border bg-background flex items-center px-12">
                     <SidebarTrigger className="mr-4" />
                     <div className="flex-1">
                       <span className="text-lg font-semibold text-foreground">Painel do Prestador</span>

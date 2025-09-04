@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Login = () => {
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    // e.preventDefault();
     // Lógica de login será implementada futuramente
     console.log("Login submitted");
+    navigate("/");
   };
 
   return (
@@ -32,7 +34,6 @@ const Login = () => {
                 id="email"
                 type="email"
                 placeholder="seu@email.com"
-                required
               />
             </div>
             
@@ -42,13 +43,12 @@ const Login = () => {
                 id="password"
                 type="password"
                 placeholder="Digite sua senha"
-                required
               />
             </div>
           </CardContent>
           
           <CardFooter className="flex flex-col space-y-4">
-            <Button type="submit" className="w-full">
+            <Button  className="w-full" onClick={handleSubmit}>
               Entrar
             </Button>
             

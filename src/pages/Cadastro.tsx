@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { citiesSP } from "@/data/cities-sp";
 
 const Cadastro = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -26,6 +27,7 @@ const Cadastro = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    navigate("/");
     
     if (formData.senha !== formData.confirmarSenha) {
       alert("As senhas não coincidem!");
@@ -58,7 +60,7 @@ const Cadastro = () => {
                 placeholder="Seu nome completo"
                 value={formData.nome}
                 onChange={(e) => handleInputChange("nome", e.target.value)}
-                required
+                
               />
             </div>
             
@@ -70,7 +72,7 @@ const Cadastro = () => {
                 placeholder="seu@email.com"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                required
+                
               />
             </div>
             
@@ -82,7 +84,7 @@ const Cadastro = () => {
                 placeholder="(11) 99999-9999"
                 value={formData.whatsapp}
                 onChange={(e) => handleInputChange("whatsapp", e.target.value)}
-                required
+                
               />
             </div>
             
@@ -102,7 +104,7 @@ const Cadastro = () => {
               <Select
                 value={formData.cidade}
                 onValueChange={(value) => handleInputChange("cidade", value)}
-                required
+                
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione sua cidade" />
