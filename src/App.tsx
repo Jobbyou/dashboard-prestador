@@ -37,16 +37,18 @@ const App = () => (
                       <span className="text-lg font-semibold text-foreground">Painel do Prestador</span>
                     </div>
                   </header>
-                  <main className="flex-1 overflow-auto">
-                    <Routes>
-                      <Route path="/" element={<Dashboard />} />
-                      <Route path="/perfil" element={<Profile />} />
-                      <Route path="/analytics" element={<Analytics />} />
-                      <Route path="/assinatura" element={<div className="p-6"><h1 className="text-2xl font-bold">Assinatura - Em Desenvolvimento</h1></div>} />
-                      <Route path="/configuracoes" element={<div className="p-6"><h1 className="text-2xl font-bold">Configurações - Em Desenvolvimento</h1></div>} />
-                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
+                  <main className="flex-1 overflow-auto bg-background">
+                    <div className="min-h-full">
+                      <Routes>
+                        <Route path="/" element={<Dashboard />} />
+                        <Route path="/perfil" element={<Profile />} />
+                        <Route path="/analytics" element={<Analytics />} />
+                        <Route path="/assinatura" element={<div className="p-8"><h1 className="text-2xl font-bold">Assinatura - Em Desenvolvimento</h1></div>} />
+                        <Route path="/configuracoes" element={<div className="p-8"><h1 className="text-2xl font-bold">Configurações - Em Desenvolvimento</h1></div>} />
+                        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </div>
                   </main>
                 </div>
               </div>

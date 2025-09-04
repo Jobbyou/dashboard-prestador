@@ -68,17 +68,16 @@ export function AppSidebar() {
       className={`${collapsed ? "w-16" : "w-72"} transition-all duration-300 ease-in-out`}
       collapsible="icon"
     >
-      <SidebarContent className="to-sidebar/95 ">
+      <SidebarContent className="bg-gradient-to-b from-sidebar to-sidebar/95 backdrop-blur-sm">
         {/* Logo Section - Modernized */}
-        <div className="p-4 border-b border-sidebar-border/50">
+        <div className={`border-b border-sidebar-border/50 ${collapsed ? 'p-3' : 'p-6'}`}>
           {!collapsed ? (
-            <div className="flex flex-col items-center space-y-2">
-              <div className="w-full flex items-center justify-center ">
+            <div className="flex flex-col items-center space-y-3">
+              <div className="w-full max-w-32 flex items-center justify-center">
                 <img 
                   src="/logo.png" 
                   alt="Jobbyou Logo" 
-                  className="w-full h-20 object-contain"
-      
+                  className="w-full h-16 object-contain"
                 />
               </div>
               <div className="text-center">
@@ -87,7 +86,7 @@ export function AppSidebar() {
             </div>
           ) : (
             <div className="flex justify-center">
-              <div className="w-10 h-10 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
                 <img 
                   src="/logo.png" 
                   alt="Jobbyou Logo" 
@@ -107,8 +106,8 @@ export function AppSidebar() {
         </div>
 
         {/* Navigation Section */}
-        <SidebarGroup className="flex-1 px-3 py-4">
-          <SidebarGroupLabel className="text-white/60 text-xs uppercase tracking-wider font-semibold px-3 py-2 mb-2">
+        <SidebarGroup className={`flex-1 py-4 ${collapsed ? 'px-2' : 'px-4'}`}>
+          <SidebarGroupLabel className={`text-white/60 text-xs uppercase tracking-wider font-semibold py-2 mb-2 ${collapsed ? 'px-2' : 'px-4'}`}>
             {!collapsed && (
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-3 h-3" />
@@ -164,9 +163,9 @@ export function AppSidebar() {
         </SidebarGroup>
 
         {/* User Section - Modernized */}
-        <div className="p-3 border-t border-sidebar-border/50">
-          <div className={`flex items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-200 group cursor-pointer ${
-            collapsed ? 'justify-center' : 'space-x-3'
+        <div className={`border-t border-sidebar-border/50 ${collapsed ? 'p-2' : 'p-4'}`}>
+          <div className={`flex items-center rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-200 group cursor-pointer ${
+            collapsed ? 'justify-center p-2' : 'space-x-3 p-3'
           }`}>
             <div className="w-8 h-8 bg-gradient-to-br from-amber to-safety-orange rounded-lg flex items-center justify-center">
               <User className="w-4 h-4 text-white" />
@@ -181,7 +180,7 @@ export function AppSidebar() {
         </div>
 
         {/* Logout Section - Modernized */}
-        <div className="p-3">
+        <div className={collapsed ? 'p-2' : 'p-4'}>
           <SidebarMenuButton className={`w-full h-12 rounded-xl text-white/80 hover:text-red-400 hover:bg-red-500/10 transition-all duration-200 group ${
             collapsed ? 'flex items-center justify-center' : ''
           }`}>

@@ -14,7 +14,7 @@ import {
 
 export default function Dashboard() {
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-12 space-y-8">
       {/* Welcome Header */}
       <div className="space-y-2">
         <h1 className="text-3xl font-bold text-foreground">
