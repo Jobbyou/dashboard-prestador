@@ -15,14 +15,60 @@ import {
   MapPin, 
   Phone, 
   Briefcase,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Zap,
+  Wrench,
+  Car,
+  Home,
+  Scissors,
+  Paintbrush,
+  Hammer,
+  Shield,
+  Laptop,
+  Smartphone,
+  Utensils,
+  Shirt,
+  Heart,
+  GraduationCap,
+  Music,
+  Camera as CameraIcon,
+  Dumbbell,
+  TreePine,
+  Baby,
+  Dog,
+  Plane,
+  Ship,
+  Truck
 } from "lucide-react"
 
 export default function Profile() {
-  const [services, setServices] = useState([
-    { id: 1, name: "Instalação Elétrica Residencial", description: "Instalação completa de sistemas elétricos", price: "R$ 150/hora" },
-    { id: 2, name: "Manutenção Preventiva", description: "Verificação e manutenção de sistemas elétricos", price: "R$ 120/hora" }
-  ])
+  // Lista de serviços disponíveis
+  const availableServices = [
+    { id: 1, name: "Eletricista", icon: Zap, category: "Construção e Reforma" },
+    { id: 2, name: "Encanador", icon: Wrench, category: "Construção e Reforma" },
+    { id: 3, name: "Taxista", icon: Car, category: "Transporte" },
+    { id: 4, name: "Pintor", icon: Paintbrush, category: "Construção e Reforma" },
+    { id: 5, name: "Carpinteiro", icon: Hammer, category: "Construção e Reforma" },
+    { id: 6, name: "Barbeiro", icon: Scissors, category: "Beleza e Estética" },
+    { id: 7, name: "Segurança", icon: Shield, category: "Segurança" },
+    { id: 8, name: "Técnico em Informática", icon: Laptop, category: "Tecnologia" },
+    { id: 9, name: "Técnico em Celular", icon: Smartphone, category: "Tecnologia" },
+    { id: 10, name: "Cozinheiro", icon: Utensils, category: "Alimentação" },
+    { id: 11, name: "Costureiro", icon: Shirt, category: "Moda e Têxtil" },
+    { id: 12, name: "Cuidador de Idosos", icon: Heart, category: "Cuidados" },
+    { id: 13, name: "Professor Particular", icon: GraduationCap, category: "Educação" },
+    { id: 14, name: "Músico", icon: Music, category: "Entretenimento" },
+    { id: 15, name: "Fotógrafo", icon: CameraIcon, category: "Entretenimento" },
+    { id: 16, name: "Personal Trainer", icon: Dumbbell, category: "Saúde e Fitness" },
+    { id: 17, name: "Jardineiro", icon: TreePine, category: "Jardinagem" },
+    { id: 18, name: "Babá", icon: Baby, category: "Cuidados" },
+    { id: 19, name: "Adestrador de Cães", icon: Dog, category: "Cuidados" },
+    { id: 20, name: "Piloto", icon: Plane, category: "Transporte" },
+    { id: 21, name: "Marinheiro", icon: Ship, category: "Transporte" },
+    { id: 22, name: "Motorista de Caminhão", icon: Truck, category: "Transporte" }
+  ]
+
+  const [selectedServices, setSelectedServices] = useState<number[]>([1, 2]) // IDs dos serviços selecionados
 
   const [portfolioImages] = useState([
     "/api/placeholder/300/200",
@@ -30,6 +76,24 @@ export default function Profile() {
     "/api/placeholder/300/200",
     "/api/placeholder/300/200"
   ])
+
+  // Função para alternar seleção de serviço
+  const toggleService = (serviceId: number) => {
+    setSelectedServices(prev => 
+      prev.includes(serviceId) 
+        ? prev.filter(id => id !== serviceId)
+        : [...prev, serviceId]
+    )
+  }
+
+  // Agrupar serviços por categoria
+  const servicesByCategory = availableServices.reduce((acc, service) => {
+    if (!acc[service.category]) {
+      acc[service.category] = []
+    }
+    acc[service.category].push(service)
+    return acc
+  }, {} as Record<string, typeof availableServices>)
 
   return (
     <div className="p-4 sm:p-6 lg:p-12 space-y-6 sm:space-y-8">
@@ -159,45 +223,89 @@ export default function Profile() {
                 <span>Meus Serviços</span>
               </CardTitle>
               <CardDescription>
-                Liste todos os serviços que você oferece com descrições claras
+                Selecione os serviços que você oferece. Os valores serão negociados diretamente com os clientes via WhatsApp.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {/* Services List */}
-              <div className="space-y-4">
-                {services.map((service) => (
-                  <div key={service.id} className="border border-border rounded-lg p-4 space-y-3">
-                    <div className="flex flex-col sm:flex-row items-start justify-between space-y-3 sm:space-y-0">
-                      <div className="space-y-2 flex-1 w-full">
-                        <Input 
-                          defaultValue={service.name}
-                          className="font-medium border-border focus:ring-primary"
-                          placeholder="Nome do serviço"
-                        />
-                        <Textarea 
-                          defaultValue={service.description}
-                          className="border-border focus:ring-primary"
-                          placeholder="Descrição detalhada do serviço"
-                        />
-                        <Input 
-                          defaultValue={service.price}
-                          className="border-border focus:ring-primary w-full sm:w-48"
-                          placeholder="Preço (opcional)"
-                        />
-                      </div>
-                      <Button variant="destructive" size="sm" className="ml-0 sm:ml-4 self-end sm:self-start">
-                        <X className="w-4 h-4" />
-                      </Button>
+              {/* Serviços Selecionados */}
+              {selectedServices.length > 0 && (
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium text-foreground">
+                    Serviços Selecionados ({selectedServices.length})
+                  </Label>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedServices.map(serviceId => {
+                      const service = availableServices.find(s => s.id === serviceId)
+                      if (!service) return null
+                      const IconComponent = service.icon
+                      return (
+                        <Badge 
+                          key={serviceId} 
+                          variant="secondary" 
+                          className="flex items-center space-x-2 px-3 py-2 text-sm"
+                        >
+                          <IconComponent className="w-4 h-4" />
+                          <span>{service.name}</span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-auto p-0 ml-1 hover:bg-destructive hover:text-destructive-foreground"
+                            onClick={() => toggleService(serviceId)}
+                          >
+                            <X className="w-3 h-3" />
+                          </Button>
+                        </Badge>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Lista de Serviços por Categoria */}
+              <div className="space-y-6">
+                {Object.entries(servicesByCategory).map(([category, services]) => (
+                  <div key={category} className="space-y-3">
+                    <h3 className="text-lg font-semibold text-foreground border-b border-border pb-2">
+                      {category}
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {services.map((service) => {
+                        const IconComponent = service.icon
+                        const isSelected = selectedServices.includes(service.id)
+                        return (
+                          <div
+                            key={service.id}
+                            className={`border-2 rounded-lg p-4 cursor-pointer transition-all duration-200 hover:shadow-md ${
+                              isSelected 
+                                ? 'border-primary bg-primary/5 shadow-sm' 
+                                : 'border-border hover:border-primary/50'
+                            }`}
+                            onClick={() => toggleService(service.id)}
+                          >
+                            <div className="flex items-center space-x-3">
+                              <div className={`p-2 rounded-lg ${
+                                isSelected ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                              }`}>
+                                <IconComponent className="w-5 h-5" />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="font-medium text-foreground">{service.name}</h4>
+                              </div>
+                              <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+                                isSelected 
+                                  ? 'border-primary bg-primary text-primary-foreground' 
+                                  : 'border-border'
+                              }`}>
+                                {isSelected && <div className="w-2 h-2 bg-current rounded-full" />}
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
                     </div>
                   </div>
                 ))}
               </div>
-
-              {/* Add Service */}
-              <Button variant="outline" className="border-2 border-dashed border-primary text-primary hover:bg-primary/10 w-full sm:w-auto">
-                <Plus className="w-4 h-4 mr-2" />
-                Adicionar Novo Serviço
-              </Button>
 
               <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
                 Salvar Serviços
