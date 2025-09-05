@@ -72,12 +72,12 @@ export function AppSidebar() {
         {/* Logo Section - Modernized */}
         <div className={`border-b border-sidebar-border/50 ${collapsed ? 'p-3' : 'p-6'}`}>
           {!collapsed ? (
-            <div className="flex flex-col items-center space-y-3">
-              <div className="w-full max-w-32 flex items-center justify-center">
+            <div className="flex flex-col items-center space-y-0">
+              <div className="w-full flex items-center justify-center">
                 <img 
                   src="/logo.png" 
                   alt="Jobbyou Logo" 
-                  className="w-full h-16 object-contain"
+                  className="w-full h-24 object-contain"
                 />
               </div>
               <div className="text-center">
