@@ -14,26 +14,26 @@ import {
 
 export default function Analytics() {
   return (
-    <div className="p-12 space-y-8">
+    <div className="p-4 sm:p-6 lg:p-12 space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="space-y-4">
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
             Analytics
           </h1>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-base sm:text-lg">
             Acompanhe o desempenho do seu perfil e entenda como os clientes te encontram
           </p>
         </div>
 
         {/* Period Filter */}
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
           <div className="flex items-center space-x-2">
             <Calendar className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-foreground">Período:</span>
           </div>
           <Select defaultValue="30d">
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-full sm:w-48">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -58,7 +58,7 @@ export default function Analytics() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-80 flex items-center justify-center bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg border-2 border-dashed border-border">
+          <div className="h-60 sm:h-80 flex items-center justify-center bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg border-2 border-dashed border-border">
             <div className="text-center space-y-2">
               <BarChart3 className="w-16 h-16 text-muted-foreground mx-auto" />
               <h3 className="font-medium text-foreground">Gráfico de Visualizações vs. Contatos</h3>
@@ -81,7 +81,7 @@ export default function Analytics() {
       </Card>
 
       {/* Secondary Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Origin Chart */}
         <Card className="shadow-card">
           <CardHeader>
@@ -141,43 +141,43 @@ export default function Analytics() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-3">
-                <Eye className="w-5 h-5 text-primary" />
-                <div>
-                  <p className="font-medium text-foreground">Total de Visualizações</p>
-                  <p className="text-sm text-muted-foreground">Perfil visto por clientes</p>
+              <div className="flex items-center space-x-3 flex-1 min-w-0">
+                <Eye className="w-5 h-5 text-primary flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-foreground truncate">Total de Visualizações</p>
+                  <p className="text-sm text-muted-foreground truncate">Perfil visto por clientes</p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="text-2xl font-bold text-primary">1,234</p>
+              <div className="text-right flex-shrink-0 ml-2">
+                <p className="text-xl sm:text-2xl font-bold text-primary">1,234</p>
                 <p className="text-xs text-success">+12% ↗</p>
               </div>
             </div>
 
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-3">
-                <MessageCircle className="w-5 h-5 text-accent" />
-                <div>
-                  <p className="font-medium text-foreground">Taxa de Conversão</p>
-                  <p className="text-sm text-muted-foreground">Visualizações → Contatos</p>
+              <div className="flex items-center space-x-3 flex-1 min-w-0">
+                <MessageCircle className="w-5 h-5 text-accent flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-foreground truncate">Taxa de Conversão</p>
+                  <p className="text-sm text-muted-foreground truncate">Visualizações → Contatos</p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="text-2xl font-bold text-accent">2.3%</p>
+              <div className="text-right flex-shrink-0 ml-2">
+                <p className="text-xl sm:text-2xl font-bold text-accent">2.3%</p>
                 <p className="text-xs text-success">+0.4% ↗</p>
               </div>
             </div>
 
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-3">
-                <Search className="w-5 h-5 text-safety-orange" />
-                <div>
-                  <p className="font-medium text-foreground">Posição Média</p>
-                  <p className="text-sm text-muted-foreground">Ranking em buscas</p>
+              <div className="flex items-center space-x-3 flex-1 min-w-0">
+                <Search className="w-5 h-5 text-safety-orange flex-shrink-0" />
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-foreground truncate">Posição Média</p>
+                  <p className="text-sm text-muted-foreground truncate">Ranking em buscas</p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="text-2xl font-bold" style={{color: 'hsl(var(--safety-orange))'}}>3.2</p>
+              <div className="text-right flex-shrink-0 ml-2">
+                <p className="text-xl sm:text-2xl font-bold" style={{color: 'hsl(var(--safety-orange))'}}>3.2</p>
                 <p className="text-xs text-success">-0.8 ↗</p>
               </div>
             </div>

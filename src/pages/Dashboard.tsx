@@ -14,13 +14,13 @@ import {
 
 export default function Dashboard() {
   return (
-    <div className="p-12 space-y-8">
+    <div className="p-4 sm:p-6 lg:p-12 space-y-6 sm:space-y-8">
       {/* Welcome Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold text-foreground">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
           Olá, João Silva!
         </h1>
-        <p className="text-muted-foreground text-lg">
+        <p className="text-muted-foreground text-base sm:text-lg">
           Bem-vindo ao seu painel de controle. Vamos impulsionar seu negócio hoje?
         </p>
       </div>
@@ -44,14 +44,14 @@ export default function Dashboard() {
             </div>
             <Progress value={75} className="h-2" />
           </div>
-          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium shadow-accent">
+          <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium shadow-accent w-full sm:w-auto">
             Melhorar meu Perfil
           </Button>
         </CardContent>
       </Card>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         <Card className="shadow-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -108,7 +108,7 @@ export default function Dashboard() {
       </div>
 
       {/* Bottom Grid - Reviews and WhatsApp Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Recent Reviews */}
         <Card className="shadow-card">
           <CardHeader>
@@ -165,44 +165,44 @@ export default function Dashboard() {
           <CardContent className="space-y-4">
             {/* WhatsApp Contact 1 */}
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+              <div className="flex items-center space-x-3 flex-1 min-w-0">
+                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center flex-shrink-0">
                   <MessageCircle className="w-4 h-4 text-white" />
                 </div>
-                <div>
-                  <h4 className="text-sm font-medium">Ana Costa</h4>
-                  <p className="text-xs text-muted-foreground">Interessada em instalação elétrica</p>
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-sm font-medium truncate">Ana Costa</h4>
+                  <p className="text-xs text-muted-foreground truncate">Interessada em instalação elétrica</p>
                 </div>
               </div>
-              <span className="text-xs text-muted-foreground">2h atrás</span>
+              <span className="text-xs text-muted-foreground flex-shrink-0 ml-2">2h atrás</span>
             </div>
 
             {/* WhatsApp Contact 2 */}
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+              <div className="flex items-center space-x-3 flex-1 min-w-0">
+                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center flex-shrink-0">
                   <MessageCircle className="w-4 h-4 text-white" />
                 </div>
-                <div>
-                  <h4 className="text-sm font-medium">Roberto Silva</h4>
-                  <p className="text-xs text-muted-foreground">Precisa de manutenção elétrica</p>
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-sm font-medium truncate">Roberto Silva</h4>
+                  <p className="text-xs text-muted-foreground truncate">Precisa de manutenção elétrica</p>
                 </div>
               </div>
-              <span className="text-xs text-muted-foreground">1 dia atrás</span>
+              <span className="text-xs text-muted-foreground flex-shrink-0 ml-2">1 dia atrás</span>
             </div>
 
             {/* WhatsApp Contact 3 */}
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+              <div className="flex items-center space-x-3 flex-1 min-w-0">
+                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center flex-shrink-0">
                   <MessageCircle className="w-4 h-4 text-white" />
                 </div>
-                <div>
-                  <h4 className="text-sm font-medium">Carla Mendes</h4>
-                  <p className="text-xs text-muted-foreground">Orçamento para projeto residencial</p>
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-sm font-medium truncate">Carla Mendes</h4>
+                  <p className="text-xs text-muted-foreground truncate">Orçamento para projeto residencial</p>
                 </div>
               </div>
-              <span className="text-xs text-muted-foreground">3 dias atrás</span>
+              <span className="text-xs text-muted-foreground flex-shrink-0 ml-2">3 dias atrás</span>
             </div>
           </CardContent>
         </Card>

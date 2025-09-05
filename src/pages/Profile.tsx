@@ -32,26 +32,26 @@ export default function Profile() {
   ])
 
   return (
-    <div className="p-12 space-y-8">
+    <div className="p-4 sm:p-6 lg:p-12 space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold text-foreground">
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
           Meu Perfil Público
         </h1>
-        <p className="text-muted-foreground text-lg">
+        <p className="text-muted-foreground text-base sm:text-lg">
           Construa sua vitrine profissional e atraia mais clientes
         </p>
       </div>
 
-      <Tabs defaultValue="informacoes" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3 bg-muted">
-          <TabsTrigger value="informacoes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+      <Tabs defaultValue="informacoes" className="space-y-4 sm:space-y-6">
+        <TabsList className="grid w-full grid-cols-3 bg-muted h-auto">
+          <TabsTrigger value="informacoes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
             Informações
           </TabsTrigger>
-          <TabsTrigger value="servicos" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+          <TabsTrigger value="servicos" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
             Serviços
           </TabsTrigger>
-          <TabsTrigger value="portfolio" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+          <TabsTrigger value="portfolio" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
             Portfólio
           </TabsTrigger>
         </TabsList>
@@ -72,11 +72,11 @@ export default function Profile() {
               {/* Profile Photo */}
               <div className="space-y-2">
                 <Label className="text-sm font-medium">Foto de Perfil</Label>
-                <div className="flex items-center space-x-4">
-                  <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border">
-                    <Camera className="w-8 h-8 text-muted-foreground" />
+                <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-muted rounded-full flex items-center justify-center border-2 border-dashed border-border">
+                    <Camera className="w-6 h-6 sm:w-8 sm:h-8 text-muted-foreground" />
                   </div>
-                  <Button variant="outline" className="border-2 border-dashed">
+                  <Button variant="outline" className="border-2 border-dashed w-full sm:w-auto">
                     <Upload className="w-4 h-4 mr-2" />
                     Carregar Foto
                   </Button>
@@ -84,7 +84,7 @@ export default function Profile() {
               </div>
 
               {/* Basic Info Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="nome">Nome Completo</Label>
                   <Input 
@@ -143,7 +143,7 @@ export default function Profile() {
                 />
               </div>
 
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent">
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
                 Salvar Informações
               </Button>
             </CardContent>
@@ -167,8 +167,8 @@ export default function Profile() {
               <div className="space-y-4">
                 {services.map((service) => (
                   <div key={service.id} className="border border-border rounded-lg p-4 space-y-3">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2 flex-1">
+                    <div className="flex flex-col sm:flex-row items-start justify-between space-y-3 sm:space-y-0">
+                      <div className="space-y-2 flex-1 w-full">
                         <Input 
                           defaultValue={service.name}
                           className="font-medium border-border focus:ring-primary"
@@ -181,11 +181,11 @@ export default function Profile() {
                         />
                         <Input 
                           defaultValue={service.price}
-                          className="border-border focus:ring-primary w-48"
+                          className="border-border focus:ring-primary w-full sm:w-48"
                           placeholder="Preço (opcional)"
                         />
                       </div>
-                      <Button variant="destructive" size="sm" className="ml-4">
+                      <Button variant="destructive" size="sm" className="ml-0 sm:ml-4 self-end sm:self-start">
                         <X className="w-4 h-4" />
                       </Button>
                     </div>
@@ -194,12 +194,12 @@ export default function Profile() {
               </div>
 
               {/* Add Service */}
-              <Button variant="outline" className="border-2 border-dashed border-primary text-primary hover:bg-primary/10">
+              <Button variant="outline" className="border-2 border-dashed border-primary text-primary hover:bg-primary/10 w-full sm:w-auto">
                 <Plus className="w-4 h-4 mr-2" />
                 Adicionar Novo Serviço
               </Button>
 
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent">
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
                 Salvar Serviços
               </Button>
             </CardContent>
@@ -236,7 +236,7 @@ export default function Profile() {
               </div>
 
               {/* Portfolio Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 {portfolioImages.map((image, index) => (
                   <div key={index} className="relative group">
                     <div className="aspect-square bg-muted rounded-lg border border-border overflow-hidden">
@@ -255,7 +255,7 @@ export default function Profile() {
                 ))}
               </div>
 
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent">
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
                 Salvar Portfólio
               </Button>
             </CardContent>

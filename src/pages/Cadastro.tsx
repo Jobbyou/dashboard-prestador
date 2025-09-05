@@ -39,13 +39,13 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 sm:p-6">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">
+          <CardTitle className="text-xl sm:text-2xl font-bold text-center">
             Criar Conta
           </CardTitle>
-          <CardDescription className="text-center">
+          <CardDescription className="text-center text-sm sm:text-base">
             Preencha os dados abaixo para criar sua conta
           </CardDescription>
         </CardHeader>
@@ -145,7 +145,7 @@ const Cadastro = () => {
           </CardContent>
           
           <CardFooter className="flex flex-col space-y-4">
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full h-11">
               Criar Conta
             </Button>
             

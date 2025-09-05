@@ -31,10 +31,10 @@ const App = () => (
               <div className="min-h-screen flex w-full">
                 <AppSidebar />
                 <div className="flex-1 flex flex-col">
-                  <header className="h-16 border-b border-border bg-background flex items-center px-12">
+                  <header className="h-16 border-b border-border bg-background flex items-center px-4 sm:px-6 lg:px-12">
                     <SidebarTrigger className="mr-4" />
                     <div className="flex-1">
-                      <span className="text-lg font-semibold text-foreground">Painel do Prestador</span>
+                      <span className="text-base sm:text-lg font-semibold text-foreground">Painel do Prestador</span>
                     </div>
                   </header>
                   <main className="flex-1 overflow-auto bg-background">

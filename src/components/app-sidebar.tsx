@@ -6,7 +6,8 @@ import {
   Settings, 
   LogOut,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  X
 } from "lucide-react"
 import { Link, NavLink, useLocation } from "react-router-dom"
 
@@ -21,6 +22,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const items = [
   { 
@@ -56,23 +59,44 @@ const items = [
 ]
 
 export function AppSidebar() {
-  const { state } = useSidebar()
+  const { state, setOpenMobile } = useSidebar()
   const location = useLocation()
   const currentPath = location.pathname
   const collapsed = state === "collapsed"
+  const isMobile = useIsMobile()
 
   const isActive = (path: string) => currentPath === path
 
+  // Função para fechar o menu mobile
+  const closeMobileMenu = () => {
+    if (isMobile) {
+      setOpenMobile(false)
+    }
+  }
+
   return (
     <Sidebar
-      className={`${collapsed ? "w-16" : "w-72"} transition-all duration-300 ease-in-out`}
+      className={`${collapsed && !isMobile ? "w-16" : "w-72"} transition-all duration-300 ease-in-out`}
       collapsible="icon"
+      variant={isMobile ? "sidebar" : "sidebar"}
     >
       <SidebarContent className="bg-gradient-to-b from-sidebar to-sidebar/95 backdrop-blur-sm">
         {/* Logo Section - Modernized */}
-        <div className={`border-b border-sidebar-border/50 ${collapsed ? 'p-3' : 'p-6'}`}>
-          {!collapsed ? (
+        <div className={`border-b border-sidebar-border/50 ${collapsed && !isMobile ? 'p-3' : 'p-6'}`}>
+          {!collapsed || isMobile ? (
             <div className="flex flex-col items-center space-y-0">
+              {/* Mobile Close Button */}
+              {isMobile && (
+                <div className="w-full flex justify-end mb-2">
+                  <button
+                    onClick={closeMobileMenu}
+                    className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-200 text-white/80 hover:text-white"
+                    aria-label="Fechar menu"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
               <div className="w-full flex items-center justify-center">
                 <img 
                   src="/logo.png" 
@@ -106,9 +130,9 @@ export function AppSidebar() {
         </div>
 
         {/* Navigation Section */}
-        <SidebarGroup className={`flex-1 py-4 ${collapsed ? 'px-2' : 'px-4'}`}>
-          <SidebarGroupLabel className={`text-white/60 text-xs uppercase tracking-wider font-semibold py-2 mb-2 ${collapsed ? 'px-2' : 'px-4'}`}>
-            {!collapsed && (
+        <SidebarGroup className={`flex-1 py-4 ${collapsed && !isMobile ? 'px-2' : 'px-4'}`}>
+          <SidebarGroupLabel className={`text-white/60 text-xs uppercase tracking-wider font-semibold py-2 mb-2 ${collapsed && !isMobile ? 'px-2' : 'px-4'}`}>
+            {(!collapsed || isMobile) && (
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-3 h-3" />
                 <span>Menu Principal</span>
@@ -130,8 +154,12 @@ export function AppSidebar() {
                           : "text-white/80 hover:text-amber hover:bg-white/5 hover:shadow-md"
                       }`}
                     >
-                      <NavLink to={item.url} end>
-                        {collapsed ? (
+                      <NavLink 
+                        to={item.url} 
+                        end
+                        onClick={closeMobileMenu}
+                      >
+                        {collapsed && !isMobile ? (
                           <div className="flex items-center justify-center w-full">
                             <item.icon className="w-5 h-5" />
                           </div>
@@ -149,7 +177,9 @@ export function AppSidebar() {
                                 <span className="font-medium text-sm">{item.title}</span>
                                 {active && <ChevronRight className="w-4 h-4 text-amber" />}
                               </div>
-                              <p className="text-xs text-white/50 mt-0.5">{item.description}</p>
+                              {!isMobile && (
+                                <p className="text-xs text-white/50 mt-0.5">{item.description}</p>
+                              )}
                             </div>
                           </div>
                         )}
@@ -163,31 +193,33 @@ export function AppSidebar() {
         </SidebarGroup>
 
         {/* User Section - Modernized */}
-        <div className={`border-t border-sidebar-border/50 ${collapsed ? 'p-2' : 'p-4'}`}>
+        <div className={`border-t border-sidebar-border/50 ${collapsed && !isMobile ? 'p-2' : 'p-4'}`}>
           <div className={`flex items-center rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-200 group cursor-pointer ${
-            collapsed ? 'justify-center p-2' : 'space-x-3 p-3'
+            collapsed && !isMobile ? 'justify-center p-2' : 'space-x-3 p-3'
           }`}>
             <div className="w-8 h-8 bg-gradient-to-br from-amber to-safety-orange rounded-lg flex items-center justify-center">
               <User className="w-4 h-4 text-white" />
             </div>
-            {!collapsed && (
+            {(!collapsed || isMobile) && (
               <div className="flex-1">
                 <p className="text-white font-medium text-sm">Usuário</p>
-                <p className="text-white/60 text-xs">Prestador de Serviços</p>
+                {!isMobile && (
+                  <p className="text-white/60 text-xs">Prestador de Serviços</p>
+                )}
               </div>
             )}
           </div>
         </div>
 
         {/* Logout Section - Modernized */}
-        <div className={collapsed ? 'p-2' : 'p-4'}>
+        <div className={collapsed && !isMobile ? 'p-2' : 'p-4'}>
           <SidebarMenuButton className={`w-full h-12 rounded-xl text-white/80 hover:text-red-400 hover:bg-red-500/10 transition-all duration-200 group ${
-            collapsed ? 'flex items-center justify-center' : ''
+            collapsed && !isMobile ? 'flex items-center justify-center' : ''
           }`}>
-            {collapsed ? (
+            {collapsed && !isMobile ? (
               <LogOut className="w-5 h-5" />
             ) : (
-              <Link to="/login">
+              <Link to="/login" onClick={closeMobileMenu}>
               <div className="flex items-center space-x-3">
                
                 <div className="p-2 rounded-lg bg-white/10 group-hover:bg-red-500/20 transition-all duration-200">
