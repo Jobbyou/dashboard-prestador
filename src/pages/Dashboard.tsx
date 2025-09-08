@@ -78,7 +78,7 @@ export default function Dashboard() {
             <Search className="w-4 h-4 text-accent" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-accent">456</div>
+            <div className="text-2xl font-bold text-primary">456</div>
             <p className="text-xs text-muted-foreground">
               <span className="text-success flex items-center">
                 <TrendingUp className="w-3 h-3 mr-1" />
@@ -96,7 +96,7 @@ export default function Dashboard() {
             <MessageCircle className="w-4 h-4 text-success" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-success">42</div>
+            <div className="text-2xl font-bold text-primary">42</div>
             <p className="text-xs text-muted-foreground">
               <span className="text-success flex items-center">
                 <TrendingUp className="w-3 h-3 mr-1" />
