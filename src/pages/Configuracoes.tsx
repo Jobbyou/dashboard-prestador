@@ -10,6 +10,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Check, ChevronsUpDown } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { citiesSP } from "@/data/cities-sp"
 import { 
   User, 
   Bell, 
@@ -58,6 +63,8 @@ export default function Configuracoes() {
     bairros: ["Centro", "Vila Madalena", "Pinheiros"],
     raioAtendimento: "10"
   })
+
+  const [openCidade, setOpenCidade] = useState(false)
 
   const [horarios, setHorarios] = useState({
     segunda: { ativo: true, inicio: "08:00", fim: "18:00" },
@@ -555,37 +562,62 @@ export default function Configuracoes() {
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="cidade">Cidade</Label>
-                  <Input 
-                    id="cidade" 
-                    value={localizacao.cidade}
-                    onChange={(e) => setLocalizacao(prev => ({ ...prev, cidade: e.target.value }))}
-                    className="border-border focus:ring-primary"
+                  <Label htmlFor="estado">Estado</Label>
+                  <Input
+                    id="estado"
+                    type="text"
+                    value="São Paulo"
+                    disabled
+                    className="bg-muted cursor-not-allowed"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="estado">Estado</Label>
-                  <Select 
-                    value={localizacao.estado}
-                    onValueChange={(value) => setLocalizacao(prev => ({ ...prev, estado: value }))}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecione o estado" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="SP">São Paulo</SelectItem>
-                      <SelectItem value="RJ">Rio de Janeiro</SelectItem>
-                      <SelectItem value="MG">Minas Gerais</SelectItem>
-                      <SelectItem value="RS">Rio Grande do Sul</SelectItem>
-                      <SelectItem value="PR">Paraná</SelectItem>
-                      <SelectItem value="SC">Santa Catarina</SelectItem>
-                      <SelectItem value="BA">Bahia</SelectItem>
-                      <SelectItem value="GO">Goiás</SelectItem>
-                      <SelectItem value="PE">Pernambuco</SelectItem>
-                      <SelectItem value="CE">Ceará</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="cidade">Cidade</Label>
+                  <Popover open={openCidade} onOpenChange={setOpenCidade}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={openCidade}
+                        className="w-full justify-between"
+                      >
+                        {localizacao.cidade || "Selecione sua cidade"}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full p-0">
+                      <Command>
+                        <CommandInput placeholder="Buscar cidade..." />
+                        <CommandList>
+                          <CommandEmpty>Nenhuma cidade encontrada.</CommandEmpty>
+                          <CommandGroup>
+                            {citiesSP.map((cidade) => (
+                              <CommandItem
+                                key={cidade}
+                                value={cidade}
+                                onSelect={(currentValue) => {
+                                  setLocalizacao(prev => ({ 
+                                    ...prev, 
+                                    cidade: currentValue === localizacao.cidade ? "" : currentValue 
+                                  }));
+                                  setOpenCidade(false);
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    "mr-2 h-4 w-4",
+                                    localizacao.cidade === cidade ? "opacity-100" : "opacity-0"
+                                  )}
+                                />
+                                {cidade}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
 
