@@ -132,9 +132,9 @@ export default function Configuracoes() {
           <TabsTrigger value="notificacoes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
             Notificações
           </TabsTrigger>
-          <TabsTrigger value="privacidade" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
+          {/* <TabsTrigger value="privacidade" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
             Privacidade
-          </TabsTrigger>
+          </TabsTrigger> */}
           <TabsTrigger value="localizacao" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
             Localização
           </TabsTrigger>
