@@ -11,6 +11,7 @@ import Analytics from "./pages/Analytics";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
 import MinhaAssinatura from "./pages/MinhaAssinatura";
+import Configuracoes from "./pages/Configuracoes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,7 +46,7 @@ const App = () => (
                         <Route path="/perfil" element={<Profile />} />
                         <Route path="/analytics" element={<Analytics />} />
                         <Route path="/assinatura" element={<MinhaAssinatura />} />
-                        <Route path="/configuracoes" element={<div className="p-8"><h1 className="text-2xl font-bold">Configurações - Em Desenvolvimento</h1></div>} />
+                        <Route path="/configuracoes" element={<Configuracoes />} />
                         <Route path="*" element={<NotFound />} />
                         
                       </Routes>
