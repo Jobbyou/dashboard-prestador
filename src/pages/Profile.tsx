@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { 
   User, 
   Camera, 
@@ -15,13 +16,18 @@ import {
   MapPin, 
   Phone, 
   Briefcase,
-  Image as ImageIcon
+  Image as ImageIcon,
+  ChevronDown,
+  ChevronRight
 } from "lucide-react"
 import { serviceCategories, type ServiceCategory, type ServiceSubcategory } from "@/data/services"
 
 export default function Profile() {
   // Estado para serviços selecionados (agora usando IDs de string)
   const [selectedServices, setSelectedServices] = useState<string[]>(["eletricista", "encanador"]) // IDs dos serviços selecionados
+  
+  // Estado para controlar quais categorias estão abertas
+  const [openCategories, setOpenCategories] = useState<Set<string>>(new Set(["domesticos-reparos", "beleza-estetica"]))
 
   const [portfolioImages] = useState([
     "/api/placeholder/300/200",
@@ -37,6 +43,19 @@ export default function Profile() {
         ? prev.filter(id => id !== serviceId)
         : [...prev, serviceId]
     )
+  }
+
+  // Função para alternar categoria aberta/fechada
+  const toggleCategory = (categoryId: string) => {
+    setOpenCategories(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId)
+      } else {
+        newSet.add(categoryId)
+      }
+      return newSet
+    })
   }
 
   // Função para obter todos os serviços de todas as categorias
@@ -194,6 +213,23 @@ export default function Profile() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              {/* Resumo de Serviços Selecionados */}
+              <div className="bg-muted/30 rounded-lg p-4 border border-border">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold text-foreground">
+                      Resumo dos Serviços
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {selectedServices.length} serviço{selectedServices.length !== 1 ? 's' : ''} selecionado{selectedServices.length !== 1 ? 's' : ''}
+                    </p>
+                  </div>
+                  <Badge variant="outline" className="text-lg px-3 py-1">
+                    {selectedServices.length}
+                  </Badge>
+                </div>
+              </div>
+
               {/* Serviços Selecionados */}
               {selectedServices.length > 0 && (
                 <div className="space-y-3">
@@ -227,52 +263,95 @@ export default function Profile() {
                 </div>
               )}
 
-              {/* Lista de Serviços por Categoria */}
-              <div className="space-y-6">
+              {/* Lista de Serviços por Categoria com Dropdown */}
+              <div className="space-y-4">
                 {serviceCategories.map((category) => {
                   const CategoryIcon = category.icon
+                  const isOpen = openCategories.has(category.id)
+                  const selectedCount = category.subcategories.filter(sub => selectedServices.includes(sub.id)).length
+                  
                   return (
-                    <div key={category.id} className="space-y-3">
-                      <h3 className="text-lg font-semibold text-foreground border-b border-border pb-2 flex items-center space-x-2">
-                        <CategoryIcon className="w-5 h-5 text-primary" />
-                        <span>{category.name}</span>
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        {category.subcategories.map((service) => {
-                          const IconComponent = service.icon
-                          const isSelected = selectedServices.includes(service.id)
-                          return (
-                            <div
-                              key={service.id}
-                              className={`border-2 rounded-lg p-4 cursor-pointer transition-all duration-200 hover:shadow-md ${
-                                isSelected 
-                                  ? 'border-primary bg-primary/5 shadow-sm' 
-                                  : 'border-border hover:border-primary/50'
-                              }`}
-                              onClick={() => toggleService(service.id)}
-                            >
-                              <div className="flex items-center space-x-3">
-                                <div className={`p-2 rounded-lg ${
-                                  isSelected ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
-                                }`}>
-                                  <IconComponent className="w-5 h-5" />
-                                </div>
-                                <div className="flex-1">
-                                  <h4 className="font-medium text-foreground">{service.name}</h4>
-                                </div>
-                                <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
-                                  isSelected 
-                                    ? 'border-primary bg-primary text-primary-foreground' 
-                                    : 'border-border'
-                                }`}>
-                                  {isSelected && <div className="w-2 h-2 bg-current rounded-full" />}
-                                </div>
-                              </div>
+                    <Collapsible 
+                      key={category.id} 
+                      open={isOpen} 
+                      onOpenChange={() => toggleCategory(category.id)}
+                      className="border border-border rounded-lg"
+                    >
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+                          <div className="flex items-center space-x-3">
+                            <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                              <CategoryIcon className="w-5 h-5" />
                             </div>
-                          )
-                        })}
-                      </div>
-                    </div>
+                            <div className="text-left">
+                              <h3 className="text-lg font-semibold text-foreground">
+                                {category.name}
+                              </h3>
+                              <p className="text-sm text-muted-foreground">
+                                {selectedCount > 0 
+                                  ? `${selectedCount} de ${category.subcategories.length} serviços selecionados`
+                                  : `${category.subcategories.length} serviços disponíveis`
+                                }
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            {selectedCount > 0 && (
+                              <Badge variant="secondary" className="text-xs">
+                                {selectedCount}
+                              </Badge>
+                            )}
+                            {isOpen ? (
+                              <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                            ) : (
+                              <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                            )}
+                          </div>
+                        </div>
+                      </CollapsibleTrigger>
+                      
+                      <CollapsibleContent>
+                        <div className="px-4 pb-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {category.subcategories.map((service) => {
+                              const IconComponent = service.icon
+                              const isSelected = selectedServices.includes(service.id)
+                              return (
+                                <div
+                                  key={service.id}
+                                  className={`border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:shadow-md ${
+                                    isSelected 
+                                      ? 'border-primary bg-primary/5 shadow-sm' 
+                                      : 'border-border hover:border-primary/50'
+                                  }`}
+                                  onClick={() => toggleService(service.id)}
+                                >
+                                  <div className="flex items-center space-x-3">
+                                    <div className={`p-2 rounded-lg ${
+                                      isSelected ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                                    }`}>
+                                      <IconComponent className="w-4 h-4" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                      <h4 className="font-medium text-foreground text-sm truncate">
+                                        {service.name}
+                                      </h4>
+                                    </div>
+                                    <div className={`w-4 h-4 rounded border-2 flex items-center justify-center flex-shrink-0 ${
+                                      isSelected 
+                                        ? 'border-primary bg-primary text-primary-foreground' 
+                                        : 'border-border'
+                                    }`}>
+                                      {isSelected && <div className="w-1.5 h-1.5 bg-current rounded-full" />}
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
                   )
                 })}
               </div>
