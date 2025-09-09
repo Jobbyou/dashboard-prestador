@@ -115,7 +115,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "automotivos",
-    name: "Serviços Automotivos",
+    name: "Automotivos",
     icon: Car,
     subcategories: [
       { id: "chaveiro-auto", name: "Chaveiro", icon: Key },
@@ -164,7 +164,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "domesticos-reparos",
-    name: "Serviços Domésticos e Reparos",
+    name: "Domésticos e Reparos",
     icon: Home,
     subcategories: [
       { id: "chaveiro", name: "Chaveiro", icon: Key },
@@ -267,7 +267,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "logisticos-transportes",
-    name: "Serviços Logísticos e Transportes",
+    name: "Logísticos e Transportes",
     icon: Truck,
     subcategories: [
       { id: "frete-mudancas", name: "Frete / Mudanças", icon: Truck },
