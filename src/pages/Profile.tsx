@@ -264,7 +264,7 @@ export default function Profile() {
               )}
 
               {/* Lista de Serviços por Categoria com Dropdown */}
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {serviceCategories.map((category) => {
                   const CategoryIcon = category.icon
                   const isOpen = openCategories.has(category.id)
@@ -312,7 +312,7 @@ export default function Profile() {
                       
                       <CollapsibleContent>
                         <div className="px-4 pb-4">
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                          <div className="grid grid-cols-1 gap-3">
                             {category.subcategories.map((service) => {
                               const IconComponent = service.icon
                               const isSelected = selectedServices.includes(service.id)
