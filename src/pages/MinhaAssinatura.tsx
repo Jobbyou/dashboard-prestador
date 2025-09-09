@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Check, CreditCard, Smartphone, FileText, Star, Zap, Crown } from 'lucide-react';
 
 interface Plano {
@@ -99,6 +100,7 @@ export default function MinhaAssinatura() {
   const [planoSelecionado, setPlanoSelecionado] = useState<string>('profissional');
   const [metodoPagamento, setMetodoPagamento] = useState<string>('pix');
   const [modalAberto, setModalAberto] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const planoAtual = planos.find(p => p.atual);
   const planoEscolhido = planos.find(p => p.id === planoSelecionado);
@@ -150,7 +152,8 @@ export default function MinhaAssinatura() {
             <p className="text-gray-600 text-lg">Compare os recursos e escolha o que melhor se adapta ao seu negócio</p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Desktop Grid */}
+          <div className="hidden lg:grid grid-cols-3 gap-8 max-w-6xl mx-auto">
             {planos.map((plano, index) => (
               <Card 
                 key={plano.id} 
@@ -239,6 +242,140 @@ export default function MinhaAssinatura() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Mobile Carousel */}
+          <div className="lg:hidden">
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+                dragFree: true,
+              }}
+              className="w-full px-4"
+              setApi={(api) => {
+                if (api) {
+                  api.on("select", () => {
+                    setCurrentSlide(api.selectedScrollSnap());
+                  });
+                }
+              }}
+            >
+              <CarouselContent className="-ml-1">
+                {planos.map((plano, index) => (
+                  <CarouselItem key={plano.id} className="pl-1 basis-[85%] sm:basis-[70%]">
+                    <Card 
+                      className={`relative cursor-pointer transition-all duration-300 transform ${
+                        planoSelecionado === plano.id 
+                          ? 'ring-2 ring-blue-500 shadow-lg' 
+                          : 'hover:shadow-md'
+                      } ${plano.atual ? 'opacity-75' : ''} ${
+                        plano.popular ? 'border-2 border-blue-500' : 'border border-gray-200'
+                      }`}
+                      onClick={() => !plano.atual && setPlanoSelecionado(plano.id)}
+                    >
+                      {plano.popular && (
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                          <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 text-xs font-semibold shadow-lg">
+                            ⭐ Popular
+                          </Badge>
+                        </div>
+                      )}
+                      {plano.atual && (
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                          <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1 text-xs font-semibold shadow-lg">
+                            ✓ Atual
+                          </Badge>
+                        </div>
+                      )}
+                      
+                      <CardHeader className="text-center pb-3 px-4 pt-6">
+                        <div className="flex justify-center mb-3">
+                          <div className={`p-2 rounded-full ${
+                            plano.popular 
+                              ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' 
+                              : 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600'
+                          }`}>
+                            {plano.icone}
+                          </div>
+                        </div>
+                        <CardTitle className="text-lg font-bold">{plano.nome}</CardTitle>
+                        <CardDescription className="text-gray-600 text-xs">{plano.descricao}</CardDescription>
+                        
+                        <div className="mt-3">
+                          <div className="flex items-baseline justify-center">
+                            <span className="text-3xl font-bold text-gray-900">
+                              R$ {plano.preco.toFixed(2).replace('.', ',')}
+                            </span>
+                            {plano.preco > 0 && (
+                              <span className="text-gray-500 ml-1 text-sm">/mês</span>
+                            )}
+                          </div>
+                          {plano.preco === 0 && (
+                            <div className="text-lg font-bold text-green-600 mt-1">GRÁTIS</div>
+                          )}
+                        </div>
+                      </CardHeader>
+                      
+                      <CardContent className="pt-0 px-4 pb-4">
+                        <ul className="space-y-2 mb-4">
+                          {plano.recursos.map((recurso, index) => (
+                            <li key={index} className="flex items-center gap-2">
+                              <div className="flex-shrink-0 w-3 h-3 bg-green-100 rounded-full flex items-center justify-center">
+                                <Check className="h-2 w-2 text-green-600" />
+                              </div>
+                              <span className="text-gray-700 font-medium text-xs">{recurso}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        
+                        {!plano.atual && (
+                          <Button 
+                            className={`w-full py-2 text-sm font-semibold transition-all duration-200 ${
+                              planoSelecionado === plano.id 
+                                ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700' 
+                                : plano.popular
+                                ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700'
+                                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                            }`}
+                            variant={planoSelecionado === plano.id || plano.popular ? "default" : "outline"}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setPlanoSelecionado(plano.id);
+                            }}
+                          >
+                            {planoSelecionado === plano.id ? '✓ Selecionado' : 'Selecionar'}
+                          </Button>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            
+            {/* Indicadores de navegação */}
+            <div className="flex justify-center items-center mt-6 space-x-2">
+              <div className="flex space-x-2">
+                {planos.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`h-2 rounded-full transition-all duration-200 ${
+                      index === currentSlide ? 'bg-blue-500 w-6' : 'bg-gray-300 w-2'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Texto indicativo */}
+            <div className="text-center mt-4">
+              <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
+                <span>←</span>
+                Deslize para ver mais planos
+                <span>→</span>
+              </p>
+            </div>
           </div>
         </div>
 
