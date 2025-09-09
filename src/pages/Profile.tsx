@@ -106,7 +106,7 @@ export default function Profile() {
           </TabsTrigger>
           <TabsTrigger value="portfolio" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
             Portfólio
-          </TabsTrigger>
+      fi    </TabsTrigger>
         </TabsList>
 
         {/* Informações Tab */}
