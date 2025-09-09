@@ -26,8 +26,8 @@ export default function Profile() {
   // Estado para serviços selecionados (agora usando IDs de string)
   const [selectedServices, setSelectedServices] = useState<string[]>(["eletricista", "encanador"]) // IDs dos serviços selecionados
   
-  // Estado para controlar quais categorias estão abertas
-  const [openCategories, setOpenCategories] = useState<Set<string>>(new Set(["domesticos-reparos", "beleza-estetica"]))
+  // Estado para controlar quais categorias estão abertas (apenas uma por vez)
+  const [openCategories, setOpenCategories] = useState<Set<string>>(new Set(["artesanato-criativos"]))
 
   const [portfolioImages] = useState([
     "/api/placeholder/300/200",
@@ -45,13 +45,16 @@ export default function Profile() {
     )
   }
 
-  // Função para alternar categoria aberta/fechada
+  // Função para alternar categoria aberta/fechada (accordion behavior)
   const toggleCategory = (categoryId: string) => {
     setOpenCategories(prev => {
       const newSet = new Set(prev)
       if (newSet.has(categoryId)) {
+        // Se a categoria está aberta, fecha ela
         newSet.delete(categoryId)
       } else {
+        // Se a categoria está fechada, abre ela e fecha todas as outras
+        newSet.clear()
         newSet.add(categoryId)
       }
       return newSet
