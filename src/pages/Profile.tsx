@@ -267,7 +267,7 @@ export default function Profile() {
               )}
 
               {/* Lista de Serviços por Categoria com Dropdown */}
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 items-start">
                 {serviceCategories.map((category) => {
                   const CategoryIcon = category.icon
                   const isOpen = openCategories.has(category.id)
@@ -278,7 +278,7 @@ export default function Profile() {
                       key={category.id} 
                       open={isOpen} 
                       onOpenChange={() => toggleCategory(category.id)}
-                      className="border border-border rounded-lg"
+                      className="border border-border rounded-lg h-fit"
                     >
                       <CollapsibleTrigger className="w-full">
                         <div className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
