@@ -132,22 +132,16 @@ export default function Configuracoes() {
       </div>
 
       <Tabs defaultValue="conta" className="space-y-4 sm:space-y-6">
-        <TabsList className="grid w-full grid-cols-5 bg-muted h-auto">
-          <TabsTrigger value="conta" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
+        <TabsList className="grid w-full grid-cols-3 bg-muted h-auto">
+          <TabsTrigger value="conta" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-sm sm:text-base py-3 px-2">
             Conta
           </TabsTrigger>
-          <TabsTrigger value="notificacoes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
+          <TabsTrigger value="notificacoes" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-sm sm:text-base py-3 px-2">
             Notificações
           </TabsTrigger>
-          {/* <TabsTrigger value="privacidade" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
-            Privacidade
-          </TabsTrigger> */}
-          <TabsTrigger value="localizacao" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
+          <TabsTrigger value="localizacao" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-sm sm:text-base py-3 px-2">
             Localização
           </TabsTrigger>
-          {/* <TabsTrigger value="horarios" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
-            Horários
-          </TabsTrigger> */}
         </TabsList>
 
         {/* Aba Conta */}
