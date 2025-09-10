@@ -296,12 +296,7 @@ export default function Profile() {
                               <h3 className="text-lg font-semibold text-foreground">
                                 {category.name}
                               </h3>
-                              <p className="text-sm text-muted-foreground">
-                                {selectedCount > 0 
-                                  ? `${selectedCount} de ${category.subcategories.length} serviços selecionados`
-                                  : `${category.subcategories.length} serviços disponíveis`
-                                }
-                              </p>
+                             
                             </div>
                           </div>
                           <div className="flex items-center space-x-2">
