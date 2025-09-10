@@ -136,10 +136,16 @@ export default function MinhaAssinatura() {
                 key={plano.id} 
                 className={`relative cursor-pointer transition-all duration-300 transform hover:scale-105 ${
                   planoSelecionado === plano.id 
-                    ? 'ring-4 ring-blue-500 shadow-2xl scale-105' 
+                    ? 'ring-4 ring-blue-500 shadow-2xl scale-105 border-2 border-blue-500' 
                     : 'hover:shadow-xl'
                 } ${plano.atual ? 'opacity-75' : ''} ${
-                  plano.popular ? 'border-2 border-blue-500' : 'border border-gray-200'
+                  planoSelecionado === plano.id 
+                    ? '' 
+                    : plano.id === 'premium' 
+                    ? 'border-2 border-yellow-500' 
+                    : plano.id === 'gratuito' || plano.id === 'profissional'
+                    ? 'border-2 border-black'
+                    : 'border border-gray-200'
                 }`}
                 onClick={() => !plano.atual && setPlanoSelecionado(plano.id)}
               >
@@ -180,9 +186,7 @@ export default function MinhaAssinatura() {
                         <span className="text-gray-500 ml-2 text-lg">/mês</span>
                       )}
                     </div>
-                    {plano.preco === 0 && (
-                      <div className="text-2xl font-bold text-green-600 mt-2">GRÁTIS</div>
-                    )}
+              
                   </div>
                 </CardHeader>
                 
@@ -244,10 +248,16 @@ export default function MinhaAssinatura() {
                     <Card 
                       className={`relative cursor-pointer transition-all duration-300 transform ${
                         planoSelecionado === plano.id 
-                          ? 'ring-2 ring-blue-500 shadow-lg' 
+                          ? 'ring-2 ring-blue-500 shadow-lg border-2 border-blue-500' 
                           : 'hover:shadow-md'
                       } ${plano.atual ? 'opacity-75' : ''} ${
-                        plano.popular ? 'border-2 border-blue-500' : 'border border-gray-200'
+                        planoSelecionado === plano.id 
+                          ? '' 
+                          : plano.id === 'premium' 
+                          ? 'border-2 border-yellow-500' 
+                          : plano.id === 'gratuito' || plano.id === 'profissional'
+                          ? 'border-2 border-black'
+                          : 'border border-gray-200'
                       }`}
                       onClick={() => !plano.atual && setPlanoSelecionado(plano.id)}
                     >
