@@ -45,7 +45,7 @@ const planos: Plano[] = [
       { nome: 'Serviços ilimitados', tem: false },
       { nome: 'Super destaque', tem: false },
       { nome: 'Analíticos', tem: false },
-      { nome: 'Suporte Prioritário', tem: false }
+      { nome: 'Suporte por email', tem: false }
     ],
     atual: true
   },
@@ -68,7 +68,7 @@ const planos: Plano[] = [
       { nome: 'Serviços ilimitados', tem: false },
       { nome: 'Super destaque', tem: false },
       { nome: 'Analíticos', tem: false },
-      { nome: 'Suporte Prioritário', tem: false }
+      { nome: 'Suporte por email', tem: false }
     ],
     popular: true
   },
