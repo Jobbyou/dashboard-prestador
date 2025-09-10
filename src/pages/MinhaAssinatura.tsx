@@ -48,7 +48,7 @@ const planos: Plano[] = [
       'Pode ver avaliação',
       'Comprar destaque',
       'Rede social',
-      'Suporte prioritário'
+      'Suporte por email'
     ],
     popular: true
   },
@@ -67,7 +67,7 @@ const planos: Plano[] = [
       'Rede social',
       'Super destaque',
       'Analíticos',
-      'Suporte 24/7'
+      'Suporte Prioritário'
     ]
   }
 ];
@@ -76,21 +76,18 @@ const metodosPagamento = [
   {
     id: 'pix',
     nome: 'PIX',
-    descricao: 'Pagamento instantâneo',
     icone: <Smartphone className="h-5 w-5" />,
     processador: 'Mercado Pago'
   },
   {
     id: 'credito',
     nome: 'Cartão de Crédito',
-    descricao: 'Visa, Mastercard, Elo',
     icone: <CreditCard className="h-5 w-5" />,
     processador: 'Asaas'
   },
   {
     id: 'boleto',
     nome: 'Boleto Bancário',
-    descricao: 'Pagamento em até 3 dias úteis',
     icone: <FileText className="h-5 w-5" />,
     processador: 'Asaas'
   }
@@ -113,10 +110,8 @@ export default function MinhaAssinatura() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         {/* Header com gradiente */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-6">
-            <Crown className="h-8 w-8 text-white" />
-          </div>
+        <div className="text-center mb-16">
+
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
             Escolha seu Plano
           </h1>
@@ -125,29 +120,11 @@ export default function MinhaAssinatura() {
           </p>
         </div>
 
-        {/* Plano Atual */}
-        {planoAtual && (
-          <Card className="mb-12 border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 shadow-lg">
-            <CardHeader className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-full bg-blue-100">
-                  {planoAtual.icone}
-                </div>
-              </div>
-              <CardTitle className="flex items-center justify-center gap-2 text-2xl">
-                <Badge className="bg-green-500 text-white px-3 py-1">Plano Atual</Badge>
-                {planoAtual.nome}
-              </CardTitle>
-              <CardDescription className="text-lg">
-                Você está usando o plano gratuito. Faça upgrade para desbloquear mais recursos e potencializar seu negócio.
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        )}
+   
 
         {/* Seleção de Planos */}
         <div className="mb-12">
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Escolha seu plano</h2>
             <p className="text-gray-600 text-lg">Compare os recursos e escolha o que melhor se adapta ao seu negócio</p>
           </div>
@@ -411,7 +388,6 @@ export default function MinhaAssinatura() {
                             </div>
                             <div>
                               <div className="font-semibold text-lg">{metodo.nome}</div>
-                              <div className="text-gray-600">{metodo.descricao}</div>
                               <div className="text-sm text-gray-500">Processado por {metodo.processador}</div>
                             </div>
                           </div>
