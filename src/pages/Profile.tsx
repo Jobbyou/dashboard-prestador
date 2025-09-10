@@ -315,7 +315,7 @@ export default function Profile() {
                       </CollapsibleTrigger>
                       
                       <CollapsibleContent>
-                        <div className="px-4 pb-4">
+                        <div className="px-4 pb-4 max-h-[300px] sm:max-h-none overflow-y-auto sm:overflow-visible">
                           <div className="grid grid-cols-1 gap-3">
                             {category.subcategories.map((service) => {
                               const IconComponent = service.icon
