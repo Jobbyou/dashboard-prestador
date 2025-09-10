@@ -202,8 +202,8 @@ export default function Profile() {
                 />
               </div>
 
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
-                Salvar Informações
+              <Button className="bg-accent  font-bold text-lg hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
+                Salvar 
               </Button>
             </CardContent>
           </Card>
@@ -416,8 +416,8 @@ export default function Profile() {
                 ))}
               </div>
 
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
-                Salvar Portfólio
+              <Button className="bg-accent  font-bold text-lg hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
+                Salvar 
               </Button>
             </CardContent>
           </Card>

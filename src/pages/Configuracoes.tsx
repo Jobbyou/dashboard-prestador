@@ -79,6 +79,16 @@ export default function Configuracoes() {
   const [mostrarSenha, setMostrarSenha] = useState(false)
   const [novaSenha, setNovaSenha] = useState("")
   const [confirmarSenha, setConfirmarSenha] = useState("")
+  
+  // Estados para validação de senha
+  const [validacoesSenha, setValidacoesSenha] = useState({
+    temMinimo8Caracteres: false,
+    temMaiuscula: false,
+    temMinuscula: false,
+    temNumero: false,
+    temCaracterEspecial: false,
+    senhasCoincidem: false
+  })
 
   const diasSemana = [
     { key: 'segunda', label: 'Segunda-feira' },
@@ -89,6 +99,25 @@ export default function Configuracoes() {
     { key: 'sabado', label: 'Sábado' },
     { key: 'domingo', label: 'Domingo' }
   ]
+
+  // Função para validar senha
+  const validarSenha = (senha: string) => {
+    const validacoes = {
+      temMinimo8Caracteres: senha.length >= 8,
+      temMaiuscula: /[A-Z]/.test(senha),
+      temMinuscula: /[a-z]/.test(senha),
+      temNumero: /\d/.test(senha),
+      temCaracterEspecial: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(senha),
+      senhasCoincidem: senha === confirmarSenha && senha.length > 0 && confirmarSenha.length > 0
+    }
+    setValidacoesSenha(validacoes)
+    return validacoes
+  }
+
+  // Função para verificar se todas as validações passaram
+  const senhaValida = () => {
+    return Object.values(validacoesSenha).every(validacao => validacao)
+  }
 
   const handleSalvarDadosPessoais = () => {
     // Aqui seria a lógica para salvar no backend
@@ -112,6 +141,10 @@ export default function Configuracoes() {
   }
 
   const handleAlterarSenha = () => {
+    if (!senhaValida()) {
+      alert("A senha não atende aos critérios de segurança!")
+      return
+    }
     if (novaSenha !== confirmarSenha) {
       alert("As senhas não coincidem!")
       return
@@ -206,7 +239,7 @@ export default function Configuracoes() {
 
               <Button 
                 onClick={handleSalvarDadosPessoais}
-                className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto"
+               className="bg-accent  font-bold text-lg hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto"
               >
                 <Save className="w-4 h-4 mr-2" />
                 Salvar Dados Pessoais
@@ -234,8 +267,13 @@ export default function Configuracoes() {
                       id="novaSenha" 
                       type={mostrarSenha ? "text" : "password"}
                       value={novaSenha}
-                      onChange={(e) => setNovaSenha(e.target.value)}
-                      className="border-border focus:ring-primary pr-10"
+                      onChange={(e) => {
+                        setNovaSenha(e.target.value)
+                        validarSenha(e.target.value)
+                      }}
+                      className={`border-border focus:ring-primary pr-10 ${
+                        novaSenha && !senhaValida() ? 'border-red-500' : ''
+                      }`}
                     />
                     <Button
                       type="button"
@@ -251,6 +289,71 @@ export default function Configuracoes() {
                       )}
                     </Button>
                   </div>
+                  
+                  {/* Indicadores de validação */}
+                  {novaSenha && (
+                    <div className="space-y-2 mt-3">
+                      <div className="text-sm font-medium text-muted-foreground">
+                        Critérios de segurança:
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                        <div className={`flex items-center space-x-2 ${
+                          validacoesSenha.temMinimo8Caracteres ? 'text-green-600' : 'text-red-500'
+                        }`}>
+                          {validacoesSenha.temMinimo8Caracteres ? (
+                            <CheckCircle className="w-4 h-4" />
+                          ) : (
+                            <AlertTriangle className="w-4 h-4" />
+                          )}
+                          <span>Mínimo 8 caracteres</span>
+                        </div>
+                        
+                        <div className={`flex items-center space-x-2 ${
+                          validacoesSenha.temMaiuscula ? 'text-green-600' : 'text-red-500'
+                        }`}>
+                          {validacoesSenha.temMaiuscula ? (
+                            <CheckCircle className="w-4 h-4" />
+                          ) : (
+                            <AlertTriangle className="w-4 h-4" />
+                          )}
+                          <span>Uma letra maiúscula</span>
+                        </div>
+                        
+                        <div className={`flex items-center space-x-2 ${
+                          validacoesSenha.temMinuscula ? 'text-green-600' : 'text-red-500'
+                        }`}>
+                          {validacoesSenha.temMinuscula ? (
+                            <CheckCircle className="w-4 h-4" />
+                          ) : (
+                            <AlertTriangle className="w-4 h-4" />
+                          )}
+                          <span>Uma letra minúscula</span>
+                        </div>
+                        
+                        <div className={`flex items-center space-x-2 ${
+                          validacoesSenha.temNumero ? 'text-green-600' : 'text-red-500'
+                        }`}>
+                          {validacoesSenha.temNumero ? (
+                            <CheckCircle className="w-4 h-4" />
+                          ) : (
+                            <AlertTriangle className="w-4 h-4" />
+                          )}
+                          <span>Um número</span>
+                        </div>
+                        
+                        <div className={`flex items-center space-x-2 ${
+                          validacoesSenha.temCaracterEspecial ? 'text-green-600' : 'text-red-500'
+                        }`}>
+                          {validacoesSenha.temCaracterEspecial ? (
+                            <CheckCircle className="w-4 h-4" />
+                          ) : (
+                            <AlertTriangle className="w-4 h-4" />
+                          )}
+                          <span>Um caractere especial</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -259,22 +362,50 @@ export default function Configuracoes() {
                     id="confirmarSenha" 
                     type="password"
                     value={confirmarSenha}
-                    onChange={(e) => setConfirmarSenha(e.target.value)}
-                    className="border-border focus:ring-primary"
+                    onChange={(e) => {
+                      setConfirmarSenha(e.target.value)
+                      // Revalidar quando a confirmação muda
+                      const novasValidacoes = {
+                        ...validacoesSenha,
+                        senhasCoincidem: novaSenha === e.target.value && e.target.value.length > 0
+                      }
+                      setValidacoesSenha(novasValidacoes)
+                    }}
+                    className={`border-border focus:ring-primary ${
+                      confirmarSenha && !validacoesSenha.senhasCoincidem ? 'border-red-500' : ''
+                    }`}
                   />
+                  
+                  {/* Indicador de confirmação */}
+                  {confirmarSenha && (
+                    <div className="flex items-center space-x-2 text-sm">
+                      {validacoesSenha.senhasCoincidem ? (
+                        <>
+                          <CheckCircle className="w-4 h-4 text-green-600" />
+                          <span className="text-green-600">As senhas coincidem</span>
+                        </>
+                      ) : (
+                        <>
+                          <AlertTriangle className="w-4 h-4 text-red-500" />
+                          <span className="text-red-500">As senhas não coincidem</span>
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 
               <Alert>
-                <AlertTriangle className="h-4 w-4" />
+                <Shield className="h-4 w-4" />
                 <AlertDescription>
-                  Sua senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.
+                  Para maior segurança, sua senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.
                 </AlertDescription>
               </Alert>
 
               <Button 
                 onClick={handleAlterarSenha}
-                className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto"
+                disabled={!senhaValida() || !novaSenha || !confirmarSenha}
+                className="bg-accent font-bold text-lg hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Shield className="w-4 h-4 mr-2" />
                 Alterar Senha
