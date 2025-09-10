@@ -18,7 +18,8 @@ import {
   Briefcase,
   Image as ImageIcon,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Trash
 } from "lucide-react"
 import { serviceCategories, type ServiceCategory, type ServiceSubcategory } from "@/data/services"
 
@@ -105,8 +106,7 @@ export default function Profile() {
             Serviços
           </TabsTrigger>
           <TabsTrigger value="portfolio" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground text-xs sm:text-sm py-2">
-            Portfólio
-      fi    </TabsTrigger>
+            Portfólio   </TabsTrigger>
         </TabsList>
 
         {/* Informações Tab */}
@@ -133,6 +133,11 @@ export default function Profile() {
                     <Upload className="w-4 h-4 mr-2" />
                     Carregar Foto
                   </Button>
+
+                  <Button variant="outline" className="border-2 border-solid w-full sm:w-auto border-red-200 text-red-500">
+                    <Trash className="w-4 h-4 mr-2" />
+                    Remover Foto
+                  </Button>
                 </div>
               </div>
 
@@ -155,6 +160,7 @@ export default function Profile() {
                     placeholder="Ex: Eletricista Residencial" 
                     defaultValue="Eletricista Especializado"
                     className="border-border focus:ring-primary"
+                    disabled
                   />
                 </div>
 
@@ -359,8 +365,8 @@ export default function Profile() {
                 })}
               </div>
 
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
-                Salvar Serviços
+              <Button className="bg-accent  font-bold text-lg hover:bg-accent/90 text-accent-foreground shadow-accent w-full sm:w-auto">
+                Salvar 
               </Button>
             </CardContent>
           </Card>

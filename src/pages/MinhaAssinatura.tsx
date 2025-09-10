@@ -7,7 +7,12 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Check, CreditCard, Smartphone, FileText, Star, Zap, Crown } from 'lucide-react';
+import { Check, CreditCard, Smartphone, FileText, Star, Zap, Crown, X } from 'lucide-react';
+
+interface Recurso {
+  nome: string;
+  tem: boolean;
+}
 
 interface Plano {
   id: string;
@@ -15,7 +20,7 @@ interface Plano {
   preco: number;
   descricao: string;
   icone: React.ReactNode;
-  recursos: string[];
+  recursos: Recurso[];
   popular?: boolean;
   atual?: boolean;
 }
@@ -28,10 +33,19 @@ const planos: Plano[] = [
     descricao: 'Ideal para começar',
     icone: <Star className="h-6 w-6" />,
     recursos: [
-      '1 serviço',
-      'Recurso WhatsApp',
-      'Perfil básico',
-      'Suporte por email'
+      { nome: '1 serviço', tem: true },
+      { nome: 'Recurso WhatsApp', tem: true },
+      { nome: 'Perfil básico', tem: true },
+      { nome: 'Suporte por email', tem: true },
+      { nome: '3 serviços', tem: false },
+      { nome: 'Pode avaliar', tem: false },
+      { nome: 'Pode ver avaliação', tem: false },
+      { nome: 'Comprar destaque', tem: false },
+      { nome: 'Rede social', tem: false },
+      { nome: 'Serviços ilimitados', tem: false },
+      { nome: 'Super destaque', tem: false },
+      { nome: 'Analíticos', tem: false },
+      { nome: 'Suporte Prioritário', tem: false }
     ],
     atual: true
   },
@@ -42,13 +56,19 @@ const planos: Plano[] = [
     descricao: 'Para profissionais em crescimento',
     icone: <Zap className="h-6 w-6" />,
     recursos: [
-      '3 serviços',
-      'Recurso WhatsApp',
-      'Pode avaliar',
-      'Pode ver avaliação',
-      'Comprar destaque',
-      'Rede social',
-      'Suporte por email'
+      { nome: '1 serviço', tem: false },
+      { nome: 'Recurso WhatsApp', tem: true },
+      { nome: 'Perfil básico', tem: true },
+      { nome: 'Suporte por email', tem: true },
+      { nome: '3 serviços', tem: true },
+      { nome: 'Pode avaliar', tem: true },
+      { nome: 'Pode ver avaliação', tem: true },
+      { nome: 'Comprar destaque', tem: true },
+      { nome: 'Rede social', tem: true },
+      { nome: 'Serviços ilimitados', tem: false },
+      { nome: 'Super destaque', tem: false },
+      { nome: 'Analíticos', tem: false },
+      { nome: 'Suporte Prioritário', tem: false }
     ],
     popular: true
   },
@@ -59,15 +79,19 @@ const planos: Plano[] = [
     descricao: 'Para profissionais estabelecidos',
     icone: <Crown className="h-6 w-6" />,
     recursos: [
-      'Serviços ilimitados',
-      'Recurso WhatsApp',
-      'Pode avaliar',
-      'Pode ver avaliação',
-      'Comprar destaque',
-      'Rede social',
-      'Super destaque',
-      'Analíticos',
-      'Suporte Prioritário'
+      { nome: '1 serviço', tem: false },
+      { nome: 'Recurso WhatsApp', tem: true },
+      { nome: 'Perfil básico', tem: true },
+      { nome: 'Suporte por email', tem: false },
+      { nome: '3 serviços', tem: false },
+      { nome: 'Pode avaliar', tem: true },
+      { nome: 'Pode ver avaliação', tem: true },
+      { nome: 'Comprar destaque', tem: true },
+      { nome: 'Rede social', tem: true },
+      { nome: 'Serviços ilimitados', tem: true },
+      { nome: 'Super destaque', tem: true },
+      { nome: 'Analíticos', tem: true },
+      { nome: 'Suporte Prioritário', tem: true }
     ]
   }
 ];
@@ -194,10 +218,22 @@ export default function MinhaAssinatura() {
                   <ul className="space-y-4 mb-8">
                     {plano.recursos.map((recurso, index) => (
                       <li key={index} className="flex items-center gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
-                          <Check className="h-3 w-3 text-green-600" />
+                        <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${
+                          recurso.tem 
+                            ? 'bg-green-100' 
+                            : 'bg-red-100'
+                        }`}>
+                          {recurso.tem ? (
+                            <Check className="h-3 w-3 text-green-600" />
+                          ) : (
+                            <X className="h-3 w-3 text-red-600" />
+                          )}
                         </div>
-                        <span className="text-gray-700 font-medium">{recurso}</span>
+                        <span className={`font-medium ${
+                          recurso.tem 
+                            ? 'text-gray-700' 
+                            : 'text-gray-400'
+                        }`}>{recurso.nome}</span>
                       </li>
                     ))}
                   </ul>
@@ -308,10 +344,22 @@ export default function MinhaAssinatura() {
                         <ul className="space-y-2 mb-4">
                           {plano.recursos.map((recurso, index) => (
                             <li key={index} className="flex items-center gap-2">
-                              <div className="flex-shrink-0 w-3 h-3 bg-green-100 rounded-full flex items-center justify-center">
-                                <Check className="h-2 w-2 text-green-600" />
+                              <div className={`flex-shrink-0 w-3 h-3 rounded-full flex items-center justify-center ${
+                                recurso.tem 
+                                  ? 'bg-green-100' 
+                                  : 'bg-red-100'
+                              }`}>
+                                {recurso.tem ? (
+                                  <Check className="h-2 w-2 text-green-600" />
+                                ) : (
+                                  <X className="h-2 w-2 text-red-600" />
+                                )}
                               </div>
-                              <span className="text-gray-700 font-medium text-xs">{recurso}</span>
+                              <span className={`font-medium text-xs ${
+                                recurso.tem 
+                                  ? 'text-gray-700' 
+                                  : 'text-gray-400'
+                              }`}>{recurso.nome}</span>
                             </li>
                           ))}
                         </ul>
