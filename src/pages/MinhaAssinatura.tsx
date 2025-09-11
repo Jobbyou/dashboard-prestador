@@ -148,10 +148,7 @@ export default function MinhaAssinatura() {
 
         {/* Seleção de Planos */}
         <div className="mb-12">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Escolha seu plano</h2>
-            <p className="text-gray-600 text-lg">Compare os recursos e escolha o que melhor se adapta ao seu negócio</p>
-          </div>
+
           
           {/* Desktop Grid */}
           <div className="hidden lg:grid grid-cols-3 gap-8 max-w-6xl mx-auto ">
