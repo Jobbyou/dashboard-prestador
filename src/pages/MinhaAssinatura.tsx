@@ -131,7 +131,7 @@ export default function MinhaAssinatura() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 overflow-x-hidden">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         {/* Header com gradiente */}
         <div className="text-center mb-16">
@@ -154,7 +154,7 @@ export default function MinhaAssinatura() {
           </div>
           
           {/* Desktop Grid */}
-          <div className="hidden lg:grid grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="hidden lg:grid grid-cols-3 gap-8 max-w-6xl mx-auto ">
             {planos.map((plano, index) => (
               <Card 
                 key={plano.id} 
@@ -262,14 +262,14 @@ export default function MinhaAssinatura() {
           </div>
 
           {/* Mobile Carousel */}
-          <div className="lg:hidden">
+          <div className="lg:hidden overflow-hidden ">
             <Carousel
               opts={{
                 align: "center",
                 loop: true,
                 dragFree: true,
               }}
-              className="w-full px-4"
+              className="w-full"
               setApi={(api) => {
                 if (api) {
                   api.on("select", () => {
@@ -278,11 +278,11 @@ export default function MinhaAssinatura() {
                 }
               }}
             >
-              <CarouselContent className="-ml-1">
+              <CarouselContent className="-ml-2 py-4">
                 {planos.map((plano, index) => (
-                  <CarouselItem key={plano.id} className="pl-1 basis-[85%] sm:basis-[70%]">
+                  <CarouselItem key={plano.id} className="pl-2 basis-[80%] sm:basis-[80%]">
                     <Card 
-                      className={`relative cursor-pointer transition-all duration-300 transform ${
+                      className={`relative cursor-pointer transition-all duration-300 transform h-full ${
                         planoSelecionado === plano.id 
                           ? 'ring-2 ring-blue-500 shadow-lg border-2 border-blue-500' 
                           : 'hover:shadow-md'
@@ -298,21 +298,21 @@ export default function MinhaAssinatura() {
                       onClick={() => !plano.atual && setPlanoSelecionado(plano.id)}
                     >
                       {plano.popular && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
                           <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 text-xs font-semibold shadow-lg">
                             ⭐ Popular
                           </Badge>
                         </div>
                       )}
                       {plano.atual && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
                           <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-3 py-1 text-xs font-semibold shadow-lg">
                             ✓ Atual
                           </Badge>
                         </div>
                       )}
                       
-                      <CardHeader className="text-center pb-3 px-4 pt-6">
+                      <CardHeader className="text-center pb-3 px-3 pt-6">
                         <div className="flex justify-center mb-3">
                           <div className={`p-2 rounded-full ${
                             plano.popular 
@@ -323,7 +323,7 @@ export default function MinhaAssinatura() {
                           </div>
                         </div>
                         <CardTitle className="text-lg font-bold">{plano.nome}</CardTitle>
-                        <CardDescription className="text-gray-600 text-xs">{plano.descricao}</CardDescription>
+                        <CardDescription className="text-gray-600 text-sm">{plano.descricao}</CardDescription>
                         
                         <div className="mt-3">
                           <div className="flex items-baseline justify-center">
@@ -340,22 +340,22 @@ export default function MinhaAssinatura() {
                         </div>
                       </CardHeader>
                       
-                      <CardContent className="pt-0 px-4 pb-4">
-                        <ul className="space-y-2 mb-4">
+                      <CardContent className="pt-0 px-3 pb-4 flex flex-col flex-1">
+                        <ul className="space-y-2 mb-4 flex-1">
                           {plano.recursos.map((recurso, index) => (
                             <li key={index} className="flex items-center gap-2">
-                              <div className={`flex-shrink-0 w-3 h-3 rounded-full flex items-center justify-center ${
+                              <div className={`flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center ${
                                 recurso.tem 
                                   ? 'bg-green-100' 
                                   : 'bg-red-100'
                               }`}>
                                 {recurso.tem ? (
-                                  <Check className="h-2 w-2 text-green-600" />
+                                  <Check className="h-2.5 w-2.5 text-green-600" />
                                 ) : (
-                                  <X className="h-2 w-2 text-red-600" />
+                                  <X className="h-2.5 w-2.5 text-red-600" />
                                 )}
                               </div>
-                              <span className={`font-medium text-xs ${
+                              <span className={`font-medium text-sm leading-tight ${
                                 recurso.tem 
                                   ? 'text-gray-700' 
                                   : 'text-gray-400'
@@ -366,7 +366,7 @@ export default function MinhaAssinatura() {
                         
                         {!plano.atual && (
                           <Button 
-                            className={`w-full py-2 text-sm font-semibold transition-all duration-200 ${
+                            className={`w-full py-2.5 text-sm font-semibold transition-all duration-200 mt-auto ${
                               planoSelecionado === plano.id 
                                 ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700' 
                                 : plano.popular
@@ -404,11 +404,11 @@ export default function MinhaAssinatura() {
             </div>
             
             {/* Texto indicativo */}
-            <div className="text-center mt-4">
+            <div className="text-center mt-4 px-4">
               <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-                <span>←</span>
-                Deslize para ver mais planos
-                <span>→</span>
+                <span className="text-lg">←</span>
+                <span className="whitespace-nowrap">Deslize para ver mais planos</span>
+                <span className="text-lg">→</span>
               </p>
             </div>
           </div>
