@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
+import { WhatsAppIcon } from "@/components/ui/whatsapp-icon"
 import { 
   Eye, 
   Search, 
@@ -9,7 +10,7 @@ import {
   Star, 
   TrendingUp, 
   User, 
-  MessageCircle 
+  MessageCircle
 } from "lucide-react"
 
 export default function Dashboard() {
@@ -93,8 +94,8 @@ export default function Dashboard() {
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Contatos via WhatsApp
             </CardTitle>
-            <MessageCircle className="w-4 h-4 text-success" />
-          </CardHeader>
+              <WhatsAppIcon className="w-8 h-8 text-success" />
+            </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-primary">42</div>
             <p className="text-xs text-muted-foreground">
@@ -155,7 +156,7 @@ export default function Dashboard() {
         <Card className="shadow-card">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <MessageCircle className="w-5 h-5 text-success" />
+              <WhatsAppIcon className="w-5 h-5" />
               <span>Atividade WhatsApp</span>
             </CardTitle>
             <CardDescription>
@@ -165,9 +166,9 @@ export default function Dashboard() {
           <CardContent className="space-y-4">
             {/* WhatsApp Contact 1 */}
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-              <div className="flex items-center space-x-3 flex-1 min-w-0">
-                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center flex-shrink-0">
-                  <MessageCircle className="w-4 h-4 text-white" />
+              <div className="flex items-center space-x-3 flex-1 min-w-10">
+                <div className="flex items-center justify-center flex-shrink-0">
+                  <WhatsAppIcon className="w-10 h-10 text-white" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h4 className="text-sm font-medium truncate">Ana Costa</h4>
@@ -180,8 +181,8 @@ export default function Dashboard() {
             {/* WhatsApp Contact 2 */}
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
               <div className="flex items-center space-x-3 flex-1 min-w-0">
-                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center flex-shrink-0">
-                  <MessageCircle className="w-4 h-4 text-white" />
+                <div className="flex items-center justify-center flex-shrink-0">
+                  <WhatsAppIcon className="w-10 h-10 text-white" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h4 className="text-sm font-medium truncate">Roberto Silva</h4>
@@ -194,8 +195,8 @@ export default function Dashboard() {
             {/* WhatsApp Contact 3 */}
             <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
               <div className="flex items-center space-x-3 flex-1 min-w-0">
-                <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center flex-shrink-0">
-                  <MessageCircle className="w-4 h-4 text-white" />
+                <div className="flex items-center justify-center flex-shrink-0">
+                  <WhatsAppIcon className="w-10 h-10 text-white" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <h4 className="text-sm font-medium truncate">Carla Mendes</h4>
