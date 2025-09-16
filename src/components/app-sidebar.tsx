@@ -131,14 +131,7 @@ export function AppSidebar() {
 
         {/* Navigation Section */}
         <SidebarGroup className={`flex-1 py-4 ${collapsed && !isMobile ? 'px-2' : 'px-4'}`}>
-          <SidebarGroupLabel className={`text-white/60 text-xs uppercase tracking-wider font-semibold py-2 mb-2 ${collapsed && !isMobile ? 'px-2' : 'px-4'}`}>
-            {(!collapsed || isMobile) && (
-              <div className="flex items-center space-x-2">
-                <Sparkles className="w-3 h-3" />
-                <span>Menu Principal</span>
-              </div>
-            )}
-          </SidebarGroupLabel>
+
 
           <SidebarGroupContent>
             <SidebarMenu className="space-y-2">
