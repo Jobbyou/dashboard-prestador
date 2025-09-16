@@ -76,7 +76,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar
-      className={`${collapsed && !isMobile ? "w-16" : "w-72"} transition-all duration-300 ease-in-out`}
+      className={`${collapsed && !isMobile ? "w-16" : "w-72"} transition-all duration-300 ease-in-out border-r-0`}
       collapsible="icon"
       variant={isMobile ? "sidebar" : "sidebar"}
     >
