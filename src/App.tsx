@@ -38,6 +38,10 @@ const App = () => (
                     <div className="flex-1">
                       <span className="text-base sm:text-lg font-semibold text-foreground">Painel do Prestador</span>
                     </div>
+
+                    <div className="flex items-center space-x-2">
+                     <img src="/coruja.png" alt="Jobbyou Coruja" width={32} height={32} />
+                    </div>
                   </header>
                   <main className="flex-1 overflow-auto bg-background">
                     <div className="min-h-full">
