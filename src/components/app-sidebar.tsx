@@ -110,17 +110,17 @@ export function AppSidebar() {
             </div>
           ) : (
             <div className="flex justify-center">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="w-12 h-12 flex items-center justify-center transition-all duration-300">
                 <img 
-                  src="/logo.png" 
-                  alt="Jobbyou Logo" 
-                  className="w-6 h-6 object-contain"
+                  src="/coruja.png" 
+                  alt="Jobbyou Coruja" 
+                  className="w-12 h-12 object-contain"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     const parent = target.parentElement;
                     if (parent) {
-                      parent.innerHTML = '<span class="text-midnight-blue font-bold text-lg">J</span>';
+                      parent.innerHTML = '<span class="text-amber font-bold text-lg">🦉</span>';
                     }
                   }}
                 />
