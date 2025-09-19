@@ -28,24 +28,18 @@ interface Plano {
 const planos: Plano[] = [
   {
     id: 'gratuito',
-    nome: 'Grátis',
+    nome: 'Gratuito',
     preco: 0,
     descricao: 'Ideal para começar',
     icone: <Star className="h-6 w-6" />,
     recursos: [
       { nome: '1 serviço', tem: true },
-      { nome: 'Recurso WhatsApp', tem: true },
-      { nome: 'Perfil básico', tem: true },
-      { nome: 'Suporte por email', tem: true },
-      { nome: '3 serviços', tem: false },
-      { nome: 'Pode avaliar', tem: false },
-      { nome: 'Pode ver avaliação', tem: false },
-      { nome: 'Comprar destaque', tem: false },
-      { nome: 'Rede social', tem: false },
-      { nome: 'Serviços ilimitados', tem: false },
-      { nome: 'Super destaque', tem: false },
-      { nome: 'Analíticos', tem: false },
-      { nome: 'Suporte por email', tem: false }
+      { nome: 'Integração com WhatsApp - receba contatos diretos dos clientes', tem: true },
+      { nome: 'Avaliações completas - avalie e veja avaliações', tem: false },
+      { nome: 'Destaque nas buscas', tem: false },
+      { nome: 'Relatórios e Analytics', tem: false },
+      { nome: 'Suporte prioritário', tem: false },
+      { nome: 'Opção Super Destaque', tem: false }
     ],
     atual: true
   },
@@ -56,19 +50,13 @@ const planos: Plano[] = [
     descricao: 'Para profissionais em crescimento',
     icone: <Zap className="h-6 w-6" />,
     recursos: [
-      { nome: '1 serviço', tem: false },
-      { nome: 'Recurso WhatsApp', tem: true },
-      { nome: 'Perfil básico', tem: true },
-      { nome: 'Suporte por email', tem: true },
-      { nome: '3 serviços', tem: true },
-      { nome: 'Pode avaliar', tem: true },
-      { nome: 'Pode ver avaliação', tem: true },
-      { nome: 'Comprar destaque', tem: true },
-      { nome: 'Rede social', tem: true },
-      { nome: 'Serviços ilimitados', tem: false },
-      { nome: 'Super destaque', tem: false },
-      { nome: 'Analíticos', tem: false },
-      { nome: 'Suporte por email', tem: false }
+      { nome: 'Até 3 serviços - cadastre vários serviços', tem: true },
+      { nome: 'Integração com WhatsApp - receba contatos diretos dos clientes', tem: true },
+      { nome: 'Avaliações completas - avalie e veja avaliações', tem: true },
+      { nome: 'Destaque básico - melhor posicionamento que o gratuito', tem: true },
+      { nome: 'Relatórios e Analytics - métricas sobre acessos, contatos e desempenho', tem: false },
+      { nome: 'Suporte prioritário', tem: false },
+      { nome: 'Opção Super Destaque', tem: false }
     ],
     popular: true
   },
@@ -79,19 +67,13 @@ const planos: Plano[] = [
     descricao: 'Para profissionais estabelecidos',
     icone: <Crown className="h-6 w-6" />,
     recursos: [
-      { nome: '1 serviço', tem: false },
-      { nome: 'Recurso WhatsApp', tem: true },
-      { nome: 'Perfil básico', tem: true },
-      { nome: 'Suporte por email', tem: false },
-      { nome: '3 serviços', tem: false },
-      { nome: 'Pode avaliar', tem: true },
-      { nome: 'Pode ver avaliação', tem: true },
-      { nome: 'Comprar destaque', tem: true },
-      { nome: 'Rede social', tem: true },
-      { nome: 'Serviços ilimitados', tem: true },
-      { nome: 'Super destaque', tem: true },
-      { nome: 'Analíticos', tem: true },
-      { nome: 'Suporte Prioritário', tem: true }
+      { nome: 'Serviços ilimitados - cadastre quantos serviços quiser', tem: true },
+      { nome: 'Integração com WhatsApp - receba contatos diretos dos clientes', tem: true },
+      { nome: 'Avaliações completas - avalie e veja avaliações', tem: true },
+      { nome: 'Destaque Premium automático - seus serviços em evidência na busca', tem: true },
+      { nome: 'Relatórios e Analytics - métricas sobre acessos, contatos e desempenho', tem: true },
+      { nome: 'Suporte prioritário - atendimento rápido e exclusivo', tem: true },
+      { nome: 'Opção Super Destaque - possibilidade de aparecer primeiro (adicional)', tem: true }
     ]
   }
 ];
