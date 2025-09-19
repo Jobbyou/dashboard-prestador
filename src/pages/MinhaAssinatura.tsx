@@ -277,7 +277,7 @@ export default function MinhaAssinatura() {
             >
               <CarouselContent className="-ml-2 py-4">
                 {planos.map((plano, index) => (
-                  <CarouselItem key={plano.id} className="pl-2 basis-[80%] sm:basis-[80%]">
+                  <CarouselItem key={plano.id} className="pl-2 basis-[65%] sm:basis-[65%]">
                     <Card 
                       className={`relative cursor-pointer transition-all duration-300 transform h-full ${
                         planoSelecionado === plano.id 
